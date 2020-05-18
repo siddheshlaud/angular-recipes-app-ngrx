@@ -18,6 +18,8 @@ import { AuthInterceptorService } from "./auth/auth-interceptor.service";
 import { AuthGuard } from "./auth/auth.guard";
 import { AlertComponent } from './alert/alert.component';
 import { PlaceholderDirective } from './placeholder.directive';
+import { StoreModule } from "@ngrx/store";
+import { shoppingListReducer } from "./shopping-list/store/shopping-list.reducer";
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { PlaceholderDirective } from './placeholder.directive';
     AppRoutesModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    StoreModule.forRoot({shoppingList: shoppingListReducer}) //shoppingList will be used to access this data from store.
   ],
   providers: [
     DataStorageService,

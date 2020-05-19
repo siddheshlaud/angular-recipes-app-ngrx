@@ -11,13 +11,11 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { RecipesResolverService } from "./services/recipes-resolver.service";
 import { AuthComponent } from "./auth/auth.component";
 import { AuthService } from "./services/auth.service";
-import { LoadingSpinnerComponent } from "./loading-spinner/loading-spinner.component";
 import { RecipesService } from "./services/recipes.service";
 import { ShoppingListService } from "./services/shopping-list.service";
 import { AuthInterceptorService } from "./auth/auth-interceptor.service";
 import { AuthGuard } from "./auth/auth.guard";
-import { AlertComponent } from './alert/alert.component';
-import { PlaceholderDirective } from './placeholder.directive';
+import { SharedModule } from "./shared/shared.module";
 import { StoreModule } from "@ngrx/store";
 import { shoppingListReducer } from "./shopping-list/store/shopping-list.reducer";
 
@@ -25,11 +23,7 @@ import { shoppingListReducer } from "./shopping-list/store/shopping-list.reducer
   declarations: [
     AppComponent,
     HeaderComponent,
-    DropdownDirective,
-    AuthComponent,
-    LoadingSpinnerComponent,
-    AlertComponent,
-    PlaceholderDirective
+    AuthComponent
   ],
   imports: [
     BrowserModule,
@@ -37,6 +31,7 @@ import { shoppingListReducer } from "./shopping-list/store/shopping-list.reducer
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    SharedModule,
     StoreModule.forRoot({shoppingList: shoppingListReducer}) //shoppingList will be used to access this data from store.
   ],
   providers: [
@@ -53,8 +48,7 @@ import { shoppingListReducer } from "./shopping-list/store/shopping-list.reducer
     }
   ],
 
-  bootstrap: [AppComponent],
-
-  entryComponents: [AlertComponent]
+  bootstrap: [AppComponent]
+  
 })
 export class AppModule {}

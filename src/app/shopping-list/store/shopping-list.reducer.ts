@@ -9,7 +9,7 @@ const initialState = {
 
 export function shoppingListReducer(
   state = initialState,
-  action: ShoppingListActions.AddIngredientAction
+  action: ShoppingListActions.ShoppingListAllActions
 ) {
   // = initialState gives default value
   switch (action.type) {
@@ -21,6 +21,44 @@ export function shoppingListReducer(
         ingredients: [
           ...state.ingredients, //Copy all the previous ingredients
           action.payload
+        ]
+      };
+      break;
+
+    case ShoppingListActions.ADD_INGREDIENTS:
+      //State changes should be immutable. That is we should not change the exiting object.
+      //Rather create a clone, then modify the clone and return the clone.
+      return {
+        ...state, //Spread operator to copy all the properties from previous state
+        ingredients: [
+          ...state.ingredients, //Copy all the previous ingredients
+          ...action.payload
+        ]
+      };
+      break;
+
+      case ShoppingListActions.UDPATE_INGREDIENT:
+      //State changes should be immutable. That is we should not change the exiting object.
+      //Rather create a clone, then modify the clone and return the clone.
+      const updIngredients: Ingredient[] = [...state.ingredients];
+      updIngredients[action.index] = action.payload;
+      return {
+        ...state, //Spread operator to copy all the properties from previous state
+        ingredients: [
+          ...updIngredients
+        ]
+      };
+      break;
+
+      case ShoppingListActions.DELETE_INGREDIENT:
+      //State changes should be immutable. That is we should not change the exiting object.
+      //Rather create a clone, then modify the clone and return the clone.
+      const newIngredients: Ingredient[] = [...state.ingredients];
+      newIngredients.splice(action.index, 1);
+      return {
+        ...state, //Spread operator to copy all the properties from previous state
+        ingredients: [
+          ...newIngredients
         ]
       };
       break;

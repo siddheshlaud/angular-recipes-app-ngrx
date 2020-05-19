@@ -19,7 +19,7 @@ export class DataStorageService {
 
     this.http
       .put(
-        "https://angular-recipes-app-145d6.firebaseio.com/recipes.json",
+        "https://angular-recipes-ngrx-app-a4904.firebaseio.com/recipes.json",
         recipes
       )
       .subscribe(response => {
@@ -33,7 +33,7 @@ export class DataStorageService {
       take(1),
       exhaustMap((currUser: User) => {
         return this.http.get<Recipe[]>(
-          "https://angular-recipes-app-145d6.firebaseio.com/recipes.json",
+          "https://angular-recipes-ngrx-app-a4904.firebaseio.com/recipes.json",
           {
             params: new HttpParams().set("auth", currUser.token)
           }
@@ -57,7 +57,7 @@ export class DataStorageService {
     );*/
 
     return this.http.get<Recipe[]>(
-      "https://angular-recipes-app-145d6.firebaseio.com/recipes.json")
+      "https://angular-recipes-ngrx-app-a4904.firebaseio.com/recipes.json")
       .pipe(map(
         //map operator on observable is used create empty array ingredients property if ingredeients are not present
         recipes => {
